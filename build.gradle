@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'rocks.inspectit.oce'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation(
+            "org.springframework.boot:spring-boot:${springVersion}",
+            'org.hibernate.validator:hibernate-validator:6.0.13.Final',
+    )
+
+    testImplementation(
+            'org.assertj:assertj-core:3.11.1',
+            'org.junit.jupiter:junit-jupiter-api:5.3.1',
+            'org.mockito:mockito-junit-jupiter:2.23.0'
+    )
+
+
+    compileOnly (
+            // the api is included as compile only because the open census api has to be decoupled
+            // from the inspectIT core to allow it to be pushed to the bootstrap
+            "io.opencensus:opencensus-api:${openCensusVersion}",
+            "org.projectlombok:lombok:1.18.4"
+    )
+    annotationProcessor "org.projectlombok:lombok:1.18.4"
+
+}

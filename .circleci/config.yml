@@ -1,0 +1,28 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2.1
+
+# ###############################################################
+# Jobs
+jobs:
+  # Job for checking out the source code to build and test
+  checkout_and_build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/inspectit
+    steps:
+      - checkout:
+          path: ~/inspectit/repo
+      - run: cd repo && ./gradlew test
+
+# ###############################################
+# The defined workflows
+workflows:
+  version: 2
+
+  # Workflow for testing and deploying master documentation
+  build_and_test:
+    jobs:
+      - checkout_and_build
